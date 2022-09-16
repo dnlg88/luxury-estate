@@ -23,7 +23,7 @@ const useInput = (initialValue) => {
       } catch (error) {
         console.log("Error fetching data, ", error);
       }
-    } else if (value.length == 0) {
+    } else if (value.length <= 1) {
       setSuggestions([]);
     }
   };

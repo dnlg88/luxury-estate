@@ -44,11 +44,11 @@ export const Edit = () => {
     <>
       {localStorage.getItem("token") ? (
         <div
-          className="d-flex justify-content-center col-6"
+          className="d-flex justify-content-center col-md-12 mb-5"
           style={{ height: "90vh", width: "70vw" }}
         >
-          <div className="col-6 mt-5">
-            <div className="card" style={{ width: "18rem;" }}>
+          <div className="col-md-8 mt-5">
+            <div className="card">
               <div className="card-body text-center">
                 <h5 className="card-title">Cambia tus datos</h5>
               </div>
@@ -57,6 +57,7 @@ export const Edit = () => {
                   className="list-group-item"
                   value={fullName}
                   required
+                  style={{ width: "100%" }}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Full Name"
                 />
@@ -65,6 +66,7 @@ export const Edit = () => {
                   value={email}
                   required
                   type="email"
+                  style={{ width: "100%" }}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                 />
@@ -99,6 +101,7 @@ export const Edit = () => {
                     href="#"
                     className="card-link btn btn-outline-danger"
                     onClick={() => setDeleteUser(true)}
+                    style={{ width: "100%" }}
                   >
                     Eliminar cuenta
                   </a>
