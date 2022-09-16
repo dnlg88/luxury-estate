@@ -100,7 +100,7 @@ export const Tablero = () => {
         {store.vista == "listado" ? (
           <Feed className="p-5 h1" />
         ) : store.vista == "mapa" && store.operacion == "compra" ? (
-          <div className="p-5 h1">Compra en Mapa</div>
+          <MapListings />
         ) : store.vista == "mapa" && store.operacion == "alquiler" ? (
           <MapListings />
         ) : (

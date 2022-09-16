@@ -25,54 +25,56 @@ export const MapListings = () => {
   // };
 
   return (
-    <div>
-      <Map
-        {...viewState}
-        style={{ width: "50vw", height: "80vh" }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-        mapboxAccessToken={MAPBOX_TOKEN}
-        onMove={(e) => setViewState(e.viewState)}
-      >
-        {" "}
-        {store.body_response.map((property, index) => {
-          return (
-            <Marker
-              key={index}
-              longitude={property.longitud}
-              latitude={property.latitud}
-              onClick={() => {
-                handleClick(property, index);
-              }}
-            />
-          );
-        })}
-        {selectedProperty && (
-          <Popup
-            latitude={selectedProperty.latitud}
-            longitude={selectedProperty.longitud}
-            anchor="bottom"
-            onClose={() => {
-              setSelectedProperty(null);
-            }}
-          >
-            <div>
-              <p>{selectedProperty.descripcion}</p>
-              <a
-                className="btn btn-outline-success"
+    <div className="contenedor-mapa container d-flex justify-content-center pt-4">
+      <div className="contenido-mapa container d-flex justify-content-center">
+        <Map
+          {...viewState}
+          style={{ width: "59vw", height: "85vh" }}
+          mapStyle="mapbox://styles/mapbox/streets-v9"
+          mapboxAccessToken={MAPBOX_TOKEN}
+          onMove={(e) => setViewState(e.viewState)}
+        >
+          {" "}
+          {store.body_response.map((property, index) => {
+            return (
+              <Marker
+                key={index}
+                longitude={property.longitud}
+                latitude={property.latitud}
                 onClick={() => {
-                  localStorage.setItem(
-                    "resp_element",
-                    JSON.stringify(selectedProperty)
-                  );
-                  navigate("/single/" + selectedProperty.id);
+                  handleClick(property, index);
                 }}
-              >
-                Saber mas
-              </a>
-            </div>
-          </Popup>
-        )}
-      </Map>
+              />
+            );
+          })}
+          {selectedProperty && (
+            <Popup
+              latitude={selectedProperty.latitud}
+              longitude={selectedProperty.longitud}
+              anchor="bottom"
+              onClose={() => {
+                setSelectedProperty(null);
+              }}
+            >
+              <div>
+                <p>{selectedProperty.descripcion}</p>
+                <a
+                  className="btn btn-outline-success"
+                  onClick={() => {
+                    localStorage.setItem(
+                      "resp_element",
+                      JSON.stringify(selectedProperty)
+                    );
+                    navigate("/single/" + selectedProperty.id);
+                  }}
+                >
+                  Saber mas
+                </a>
+              </div>
+            </Popup>
+          )}
+        </Map>
+      </div>
     </div>
   );
 };
