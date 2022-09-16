@@ -9,6 +9,10 @@ export const Publicar = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const handleClick1 = async () => {
     actions.switchOnCharging();
     await actions.uploadImagesToCloudinary();
@@ -35,15 +39,14 @@ export const Publicar = () => {
     }
     // aqui termina el fetch publicar
     if (store.response_publicar != "") {
-      swal(store.response_publicar);
+      await swal(store.response_publicar);
     } else {
-      swal("error: no se ha podido publicar el anuncio");
+      await swal("error: no se ha podido publicar el anuncio");
     }
     await actions.switchOffCharging();
     await actions.resetStoreVariables();
     await actions.clearLocalStorageNoUser();
-    const user = JSON.parse(localStorage.getItem("user_info"));
-    navigate(`/user/${user.id}`);
+    refreshPage();
   };
 
   const handleClick2 = () => {

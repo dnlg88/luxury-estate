@@ -71,6 +71,7 @@ class Inmueble(db.Model):
             "garage": self.garage,
             "latitud": self.latitud,
             "longitud": self.longitud,
+            "premium": self.premium,
             "user_id": self.user_id
         }
 
