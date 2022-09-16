@@ -7,9 +7,7 @@ export const MapListings = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [propertyIndex, setPropertyIndex] = useState(null);
-  // const [showPopup, setShowPopup] = useState(false);
-  const [viewState, setViewState] = React.useState({
+  const [viewState, setViewState] = useState({
     longitude: -3.74922,
     latitude: 40.463667,
     zoom: 6,

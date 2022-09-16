@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const [userInfo, setUserInfo] = useState(
+    JSON.parse(localStorage.getItem("user_info"))
+  );
   const navigate = useNavigate();
-
   const handleLogout = () => {
     actions.logout();
     navigate("/");
@@ -29,14 +31,14 @@ export const Navbar = () => {
 
         {store.token ? (
           <div className="d-flex">
-            <Link to={`/user/${localStorage.getItem("id")}`}>
+            <Link to={`/user/${userInfo.id}`}>
               <img
                 src={process.env.DEFAULT_PROFILE_PIC}
                 className="img-fluid"
                 style={{
                   height: "50px",
                   top: "3rem",
-                  border: "solid 5px gray",
+                  border: "solid 5px black",
                   borderRadius: "50%",
                 }}
               />

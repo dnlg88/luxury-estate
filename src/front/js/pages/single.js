@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/single.css";
 import { ContactForm } from "../component/contactform";
+import { SingleMap } from "../component/singleMap";
 
 export const Single = () => {
   const { store, actions } = useContext(Context);
@@ -161,6 +162,9 @@ export const Single = () => {
             <h5 className="card-text pt-4" style={{ textJustify: "justify" }}>
               {`Información del Propietario: ${elemento.descripcion}`}
             </h5>
+          </div>
+          <div className="mapa-propiedad">
+            <SingleMap />
           </div>
         </div>
       </div>
