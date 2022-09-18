@@ -31,70 +31,72 @@ export const MapListings = () => {
   // };
 
   return (
-    <div>
-      {store.body_response.length !== 0 &&
-      Array.isArray(store.body_response) ? (
-        <Map
-          {...viewState}
-          style={{ width: "50vw", height: "80vh" }}
-          mapStyle="mapbox://styles/mapbox/streets-v9"
-          mapboxAccessToken={MAPBOX_TOKEN}
-          onMove={(e) => setViewState(e.viewState)}
-        >
-          {" "}
-          {store.body_response.map((property, index) => {
-            return (
-              <Marker
-                key={index}
-                longitude={property.longitud}
-                latitude={property.latitud}
-                onClick={() => {
-                  handleClick(property, index);
-                }}
-              />
-            );
-          })}
-          {selectedProperty && (
-            <Popup
-              latitude={selectedProperty.latitud}
-              longitude={selectedProperty.longitud}
-              anchor="bottom"
-              onClose={() => {
-                setSelectedProperty(null);
-              }}
-            >
-              <div>
-                <p>{selectedProperty.descripcion}</p>
-                <a
-                  className="btn btn-outline-success"
+    <div className="contenedor-mapa container d-flex justify-content-center pt-4">
+      <div className="contenido-mapa container d-flex justify-content-center">
+        {store.body_response.length !== 0 &&
+        Array.isArray(store.body_response) ? (
+          <Map
+            {...viewState}
+            style={{ width: "59vw", height: "80vh" }}
+            mapStyle="mapbox://styles/mapbox/streets-v9"
+            mapboxAccessToken={MAPBOX_TOKEN}
+            onMove={(e) => setViewState(e.viewState)}
+          >
+            {" "}
+            {store.body_response.map((property, index) => {
+              return (
+                <Marker
+                  key={index}
+                  longitude={property.longitud}
+                  latitude={property.latitud}
                   onClick={() => {
-                    localStorage.setItem(
-                      "resp_element",
-                      JSON.stringify(selectedProperty)
-                    );
-                    navigate("/single/" + selectedProperty.id);
+                    handleClick(property, index);
                   }}
-                >
-                  Saber mas
-                </a>
+                />
+              );
+            })}
+            {selectedProperty && (
+              <Popup
+                latitude={selectedProperty.latitud}
+                longitude={selectedProperty.longitud}
+                anchor="bottom"
+                onClose={() => {
+                  setSelectedProperty(null);
+                }}
+              >
+                <div>
+                  <p>{selectedProperty.descripcion}</p>
+                  <a
+                    className="btn btn-outline-success"
+                    onClick={() => {
+                      localStorage.setItem(
+                        "resp_element",
+                        JSON.stringify(selectedProperty)
+                      );
+                      navigate("/single/" + selectedProperty.id);
+                    }}
+                  >
+                    Saber mas
+                  </a>
+                </div>
+              </Popup>
+            )}
+          </Map>
+        ) : (
+          <div className="pb-5">
+            <div className="text-center d-flex justify-content-center">
+              <div
+                className="spinner-border text-center d-flex justify-content-center align-content-center"
+                role="status"
+              >
+                <span className="visually-hidden text-center d-flex justify-content-center">
+                  Loading...
+                </span>
               </div>
-            </Popup>
-          )}
-        </Map>
-      ) : (
-        <div className="pb-5">
-          <div className="text-center d-flex justify-content-center">
-            <div
-              className="spinner-border text-center d-flex justify-content-center align-content-center"
-              role="status"
-            >
-              <span className="visually-hidden text-center d-flex justify-content-center">
-                Loading...
-              </span>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

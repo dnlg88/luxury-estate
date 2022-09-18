@@ -320,11 +320,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         aux["operacion"] = store.operacion;
         aux["comunidad"] = store.comunidad;
         aux["provincia"] = store.provincia;
-        // store.preciomin >= store.preciomax
-        //   ? (aux["preciomin"] = 0)
         aux["preciomin"] = store.preciomin;
-        // store.preciomax <= store.preciomin
-        //   ? (aux["preciomax"] = 999999999)
         aux["preciomax"] = store.preciomax;
         aux["vivienda_piso"] = store.vivienda_piso;
         aux["vivienda_chalet"] = store.vivienda_chalet;
@@ -893,6 +889,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           "pub_longitude",
           "pub_latitude",
           "pub_urls",
+          "pub_premium",
         ];
         for (let x of itemsLocalStorage) {
           localStorage.removeItem(x);
@@ -927,12 +924,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             "pub_descripcion",
             "pub_precio",
             "pub_vivienda",
+            "pub_habitaciones",
+            "pub_baños",
+          ];
+          let fuentesRequestBooleanos = [
             "pub_pet",
             "pub_garage",
             "pub_piscina",
             "pub_terraza",
-            "pub_habitaciones",
-            "pub_baños",
             "pub_premium",
           ];
           let aux = {};
@@ -941,6 +940,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           aux["user_id"] = user_id;
           for (let x of fuentesRequest) {
             aux[x] = localStorage.getItem(x);
+          }
+          for (let x of fuentesRequestBooleanos) {
+            localStorage.getItem(x) == "true"
+              ? (aux[x] = true)
+              : localStorage.getItem(x) == "false"
+              ? (aux[x] = false)
+              : "";
           }
           aux["fotos"] = store.receivedUrls;
           setStore({ inmueblesBodyRequest: aux });
