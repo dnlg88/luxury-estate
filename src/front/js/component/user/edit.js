@@ -45,7 +45,7 @@ export const Edit = () => {
       {localStorage.getItem("token") ? (
         <div
           className="d-flex justify-content-center col-md-12 mb-5"
-          style={{ height: "90vh", width: "70vw" }}
+          style={{ height: "90vh", width: "50vw" }}
         >
           <div className="col-md-8 mt-5">
             <div className="card">
@@ -72,7 +72,7 @@ export const Edit = () => {
                 />
                 {changePassword ? (
                   <input
-                    className="list-group-item"
+                    className="list-group-item w-50"
                     value={password}
                     required
                     type="password"
@@ -82,28 +82,28 @@ export const Edit = () => {
                 ) : (
                   <a
                     href="#"
-                    className="card-link btn btn-outline-success"
+                    className="card-link btn btn-outline-success w-50"
                     onClick={() => setChangePassword(true)}
                   >
-                    Change Password
+                    Change Password?
                   </a>
                 )}
                 {deleteUser ? (
                   <a
                     href="#"
-                    className="card-link btn btn-outline-danger"
+                    className="card-link btn btn-outline-danger text-center w-50 mt-1"
                     onClick={actions.deleteUser}
                   >
-                    Confirmar
+                    Sí, deseo eliminar mi cuenta
                   </a>
                 ) : (
                   <a
                     href="#"
-                    className="card-link btn btn-outline-danger"
+                    className="card-link btn btn-outline-danger w-50 mt-1"
                     onClick={() => setDeleteUser(true)}
                     style={{ width: "100%" }}
                   >
-                    Eliminar cuenta
+                    ¿Eliminar cuenta?
                   </a>
                 )}
               </ul>
