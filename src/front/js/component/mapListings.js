@@ -17,18 +17,6 @@ export const MapListings = () => {
   const handleClick = (property) => {
     setSelectedProperty(property);
   };
-  // useEffect(() => {
-  //   const getResponse = async () => {
-  //     const response = await store.body_response;
-  //     return response;
-  //   };
-  //   getResponse();
-  // }, []);
-  // const handleClose = () => {
-  //   setShowPopup(false);
-  //   setSelectedProperty(null);
-  //   setPropertyIndex(null);
-  // };
 
   return (
     <div className="contenedor-mapa container d-flex justify-content-center pt-4">
@@ -82,17 +70,18 @@ export const MapListings = () => {
               </Popup>
             )}
           </Map>
+        ) : Array.isArray(store.body_response) &&
+          store.body_response.length == 0 ? (
+          <div className="m-5 p-5">
+            <h3>No se encontró propiedades, intente una búsqueda distinta</h3>
+          </div>
         ) : (
           <div className="pb-5">
             <div className="text-center d-flex justify-content-center">
               <div
                 className="spinner-border text-center d-flex justify-content-center align-content-center"
                 role="status"
-              >
-                <span className="visually-hidden text-center d-flex justify-content-center">
-                  Loading...
-                </span>
-              </div>
+              ></div>
             </div>
           </div>
         )}
