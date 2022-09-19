@@ -39,7 +39,7 @@ export const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card card-body p-4">
+    <form onSubmit={handleSubmit} className="card card-body p-4 bg-light">
       <div className="text-start pb-4">
         <h6>{"Sucripción Luxury Estate Premium:"}</h6>
         <h4>{" 29.90 Euros"}</h4>
