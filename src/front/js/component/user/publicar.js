@@ -22,6 +22,7 @@ export const Publicar = () => {
     let opts = {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(request),
@@ -39,7 +40,7 @@ export const Publicar = () => {
     }
     // aqui termina el fetch publicar
     if (store.response_publicar != "") {
-      await swal(store.response_publicar);
+      await swal("Felicitaciones!", store.response_publicar);
     } else {
       await swal("error: no se ha podido publicar el anuncio");
     }
