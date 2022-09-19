@@ -17,7 +17,7 @@ import stripe
 
 api = Blueprint('api', __name__)
 
-stripe.api_key = 'sk_test_51Lj2kEBX1sQatE26XCKs1bsmIYg0aI52OWRFMGpkZn2tG7d7HJEPo6iH0sfu3c8sm6x5E3EYSU5cdyEzOzm636Ag00xafhBABT'
+stripe.api_key = os.environ.get("STRIPE_API_KEY")
 
 # create the object
 consulta_inmuebles = Inmuebles_Handler()
