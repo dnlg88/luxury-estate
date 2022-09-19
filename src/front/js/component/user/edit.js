@@ -4,10 +4,11 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 
 export const Edit = () => {
+  const infoFromStorage = JSON.parse(localStorage.getItem("user_info"));
   const { store, actions } = useContext(Context);
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState(localStorage.getItem("full_name"));
-  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [fullName, setFullName] = useState(infoFromStorage.full_name);
+  const [email, setEmail] = useState(infoFromStorage.email);
   const [changePassword, setChangePassword] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
   const navigate = useNavigate();
@@ -23,9 +24,15 @@ export const Edit = () => {
     if (
       fullName !== localStorage.getItem("full_name") ||
       email !== localStorage.getItem("email") ||
-      password
+      password ||
+      store.selectedImages.length > 0
     ) {
-      const resp = await actions.updateUser(fullName, email, password);
+      if (store.selectedImages.length != 0) {
+        await actions.uploadProfilePicToCloudinary();
+      }
+      const fotoUrl = localStorage.getItem("pub_userpic_url");
+      console.log(fotoUrl);
+      const resp = await actions.updateUser(fullName, email, password, fotoUrl);
       if (resp.message == "Nothing to update") {
         swal("nada que actualizar");
         setPassword("");
@@ -70,6 +77,18 @@ export const Edit = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                 />
+                <div className="fotos_input mx-3 mb-3">
+                  <label for="formFile" className="form-label pb-2">
+                    Fotos de perfil
+                  </label>
+                  <input
+                    className="form-control"
+                    id="formFile"
+                    multiple
+                    type="file"
+                    onChange={actions.uploadImagesToStore}
+                  />
+                </div>
                 {changePassword ? (
                   <input
                     className="list-group-item w-50"

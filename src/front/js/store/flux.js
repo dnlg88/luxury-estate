@@ -251,7 +251,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ token: null });
         console.log("logging out");
       },
-      updateUser: async (full_name, email, password) => {
+      updateUser: async (full_name, email, password, fotoUrl) => {
         const opts = {
           method: "POST",
           headers: {
@@ -262,6 +262,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             full_name: full_name,
             email: email,
             password: password,
+            foto: fotoUrl,
           }),
         };
         try {
@@ -964,6 +965,38 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       updateResponsePublicar: (dato) => {
         setStore({ response_publicar: dato });
+      },
+      uploadProfilePicToCloudinary: async () => {
+        const store = getStore();
+        const config = {
+          cloudName: "dsobw5vfl",
+          resource_type: "image",
+          upload_preset: "userprofile",
+        };
+        const apiUrl = `https://api.cloudinary.com/v1_1/${config.cloudName}/${config.resource_type}/upload/`;
+        const formData = new FormData();
+        formData.append("file", store.selectedImages[0]);
+        formData.append("upload_preset", config.upload_preset);
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            body: formData,
+          });
+          if (response.status != 200) {
+            throw new Error("The fetch has failed");
+          }
+          const jsonResponse = await response.json();
+          setStore({
+            receivedUserUrl: jsonResponse.url,
+          });
+          localStorage.setItem(
+            "pub_userpic_url",
+            JSON.stringify(store.receivedUserUrl)
+          );
+          return true;
+        } catch (error) {
+          console.log("The fetch has failed: ", error);
+        }
       },
 
       // clearPubFromLocalStorage: () => {  DEPRECADO por clearLocalStorageNoUser

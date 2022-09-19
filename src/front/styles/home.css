@@ -12,12 +12,10 @@
 body {
   margin: 0;
 }
-.page-body {
-  background: lightcoral;
-}
+
 .banner-test {
   height: 25%;
-  background-color: #e7e7e7;
+  background-color: #b1d4e5;
 }
 
 .profile-pic {

@@ -81,7 +81,15 @@ export const MapListings = () => {
               <div
                 className="spinner-border text-center d-flex justify-content-center align-content-center"
                 role="status"
-              ></div>
+              >
+                <div
+                  className="spinner-grow"
+                  style={{ width: "3rem", height: "3rem" }}
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
             </div>
           </div>
         )}

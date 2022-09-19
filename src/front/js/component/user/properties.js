@@ -24,7 +24,6 @@ export const Properties = () => {
         >
           <div
             style={{
-              background: "lightgreen",
               height: "80%",
               width: "100%",
               overflowX: "auto",
