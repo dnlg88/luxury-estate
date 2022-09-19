@@ -12,8 +12,12 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 # from mapbox import Geocoder;
+import json
+import stripe
 
 api = Blueprint('api', __name__)
+
+stripe.api_key = 'sk_test_51Lj2kEBX1sQatE26XCKs1bsmIYg0aI52OWRFMGpkZn2tG7d7HJEPo6iH0sfu3c8sm6x5E3EYSU5cdyEzOzm636Ag00xafhBABT'
 
 # create the object
 consulta_inmuebles = Inmuebles_Handler()
@@ -111,6 +115,7 @@ def getInmuebles():
     return response, 200
 
 @api.route('/publicar', methods=['POST'])
+@jwt_required()
 def pubInmuebles():
 
     # -------------- VALIDACION DEL BODY --------------------------------------------------------
@@ -125,3 +130,30 @@ def pubInmuebles():
     response = publicar_inmuebles.registerInmuebles(body_request, fotos_request)
     
     return jsonify(response), 200
+
+@api.route('/checkout', methods=['POST'])
+def getCheckout():
+    try: 
+        data = json.loads(request.data)
+        if data is None:
+            raise APIException('error: body is empty', status_code=403)
+
+        id = data["id"] 
+        amount = data["amount"]
+
+        # Create a PaymentIntent with the order amount and currency
+        intent = stripe.PaymentIntent.create(
+            amount=2990,
+            currency='eur',
+            description='Luxury Estate Premium',
+            payment_method=id,
+            confirm= True,
+        )
+
+        return jsonify(intent), 200
+        # return jsonify({
+        #     'clientSecret': intent['client_secret']
+        # })  
+
+    except Exception as e:
+        return jsonify("Luxury Estate Responde: No se pudo realizar el cobro. Error: " + str(e)), 403

@@ -53,7 +53,7 @@ export const Profile = () => {
             </div>
           </div>
           <div className="container-fluid text-center">
-            <div className="row d-flex justify-content-between">
+            <div className="row d-flex justify-content-center">
               <div
                 className="nav flex-column nav-pills align-items-center col col-sm-3 mt-5"
                 id="v-pills-tab"

@@ -39,9 +39,28 @@ export const Properties = () => {
                   key={i}
                 >
                   <div className="card-header">
-                    <h3>{property.comunidad}</h3>
-                    {property.direccion}
+                    {/* <div className="col-3">
+                      {`Anuncio ${
+                        property.premium == true ? "Premium" : "Gratuito"
+                      }`}
+                    </div> */}
+
+                    <div className="">
+                      <h3>{property.comunidad}</h3>
+                      {property.direccion}u
+                    </div>
+
+                    {/* <div className="col-3">
+                      {property.premium == false ? (
+                        <button className="btn btn-success">
+                          Cambiar a Premium
+                        </button>
+                      ) : (
+                        ""
+                      )}
+                    </div> */}
                   </div>
+
                   <div className="card-body">
                     <img
                       src={property.fotos[0]}

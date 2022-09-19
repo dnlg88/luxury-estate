@@ -32,7 +32,7 @@ class Inmueble(db.Model):
     comunidad = db.Column(db.String(80), unique=False, nullable=False)
     provincia = db.Column(db.String(80), unique=False, nullable=False)
     municipio = db.Column(db.String(80), unique=False, nullable=False)
-    direccion = db.Column(db.String(80), unique=False, nullable=False)
+    direccion = db.Column(db.String(300), unique=False, nullable=False)
     descripcion = db.Column(db.String(300), unique=False, nullable=True)
     precio = db.Column(db.Integer, unique=False, nullable=False)
     tipo_vivienda = db.Column(db.String(80), unique=False, nullable=False)
