@@ -1,6 +1,6 @@
 .caja_selectores {
   overflow-y: scroll;
-  height: 78vh;
+  height: 60vh;
 }
 .caja_selectores::-webkit-scrollbar {
   width: 7px;

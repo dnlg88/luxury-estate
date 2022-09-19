@@ -966,6 +966,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ response_publicar: dato });
       },
 
+      updatePublicarPremium: () => {
+        const store = getStore();
+        if (store.premium == true) {
+          setStore({ premium: false });
+        } else if (store.premium == false) {
+          setStore({ premium: true });
+        }
+        localStorage.setItem("pub_premium", store.premium);
+      },
+
       // clearPubFromLocalStorage: () => {  DEPRECADO por clearLocalStorageNoUser
       //   let itemsLocalStorage = [
       //     "pub_operacion",
