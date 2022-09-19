@@ -35,17 +35,24 @@ export const Feed = () => {
               {item.fotos.length == 0 ? (
                 <div
                   onClick={() => pasarAlSingle(index)}
-                  className="main-image col-md-5 py-5"
+                  className="main-image col-md-5 p-2"
                   style={{ background: "rgb(233,238,241)", height: "40vh" }}
                 >
+                  <h6 className="text-danger fw-bolder">
+                    {item.premium == true ? "Anuncio Premium" : ""}
+                  </h6>
                   <h3 className="text-center py-5">Aviso no tiene fotos</h3>
                 </div>
               ) : (
                 <div
                   onClick={() => pasarAlSingle(index)}
-                  className="main-imagen col-md-5"
+                  className="main-imagen col-md-5 p-2"
                   style={{ backgroundImage: `url(${item.fotos[0]})` }}
-                ></div>
+                >
+                  <h6 className="text-danger fw-bolder">
+                    {item.premium == true ? "Anuncio Premium" : ""}
+                  </h6>
+                </div>
               )}
               <div className="col-md-7 p-3">
                 <div className="card-body p-0">

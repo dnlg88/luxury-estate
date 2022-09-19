@@ -782,6 +782,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const aux1 = data["inmuebles"];
           const aux2 = data["imagenes"];
           const aux3 = getActions().joinBodies(aux1, aux2);
+          aux3.sort((a, b) => b.premium - a.premium);
           setStore({ body_response: aux3 });
           console.log("this came from the backend", aux3);
         } catch (error) {
@@ -890,6 +891,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           "pub_latitude",
           "pub_urls",
           "pub_premium",
+          "pub_pay",
         ];
         for (let x of itemsLocalStorage) {
           localStorage.removeItem(x);
@@ -974,6 +976,49 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ premium: true });
         }
         localStorage.setItem("pub_premium", store.premium);
+      },
+
+      handlePublish: async () => {
+        const store = getStore();
+        await getActions().switchOnCharging();
+        await getActions().uploadImagesToCloudinary();
+        await getActions().createInmueblesBodyRequest();
+        // aqui comienza el fetch publicar:
+        const request = store.inmueblesBodyRequest;
+        let resp = "";
+        let opts = {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(request),
+        };
+        try {
+          resp = await fetch(process.env.BACKEND_URL + "/api/publicar", opts);
+          if (resp.status != 200) {
+            throw new Error("The fetch has failed");
+          }
+          const respAsJson = await resp.json();
+          console.log("confirmacion de la publicación: ", respAsJson);
+          getActions().updateResponsePublicar(respAsJson);
+        } catch (error) {
+          console.log("The fetch has failed: ", error);
+        }
+        // aqui termina el fetch publicar
+        if (resp.status == 200 && localStorage.getItem("pub_pay") == "failed") {
+          await swal(
+            "No se pudo realizar el pago",
+            "pero te hemos publicado un anuncio gratuito. Intenta nuevamente suscribirte a los anuncios Premium cuando quieras"
+          );
+        } else if (resp.status == 200) {
+          await swal("Felicitaciones!", store.response_publicar);
+        } else {
+          await swal("error: no se ha podido publicar el anuncio");
+        }
+        await getActions().switchOffCharging();
+        await getActions().resetStoreVariables();
+        await getActions().clearLocalStorageNoUser();
       },
 
       // clearPubFromLocalStorage: () => {  DEPRECADO por clearLocalStorageNoUser

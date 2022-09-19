@@ -13,6 +13,11 @@ export const Publicar = () => {
     window.location.reload(false);
   }
 
+  const handleClickAlt = async () => {
+    await actions.createInmueblesBodyRequest();
+    navigate("/pasarela");
+  };
+
   const handleClick1 = async () => {
     actions.switchOnCharging();
     await actions.uploadImagesToCloudinary();
@@ -400,7 +405,23 @@ export const Publicar = () => {
                 </div>
 
                 {/* ----------------  botones o spinner ---------------------- */}
-                {store.charging == true ? (
+                {store.charging == true && store.premium == true ? (
+                  <div className="pb-5">
+                    <div className="text-center d-flex justify-content-center">
+                      <div
+                        className="spinner-border text-center d-flex justify-content-center"
+                        role="status"
+                      >
+                        <span className="visually-hidden text-center d-flex justify-content-center">
+                          Loading...
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      ...transfiriendo a la zona de pagos...
+                    </div>
+                  </div>
+                ) : store.charging == true && store.premium == false ? (
                   <div className="pb-5">
                     <div className="text-center d-flex justify-content-center">
                       <div
@@ -420,11 +441,17 @@ export const Publicar = () => {
                   <div className="botones-contenedor mx-3 px-0 d-flex justify-content-evenly">
                     <div className="text-center">
                       <button
-                        onClick={handleClick1}
+                        onClick={() => {
+                          if (store.premium == false) {
+                            handleClick1();
+                          } else {
+                            handleClickAlt();
+                          }
+                        }}
                         type="button"
                         className="btn btn-primary mb-3 mt-3"
                       >
-                        Publicar
+                        {store.premium == true ? "Pagar" : "Publicar"}
                       </button>
                     </div>
 
