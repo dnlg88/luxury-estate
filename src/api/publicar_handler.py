@@ -49,15 +49,21 @@ class Publicar_Handler:
         # ------------------ REGISTRAR IMAGENES DEL NUEVO INMUEBLE Y RESPONSE ----------------------------------
         fotos = pics
         cantidad_fotos = len(pics)
+        
+        tipo_anuncio = None
+        if pub_premium == True:
+            tipo_anuncio = "Premium"
+        else:
+            tipo_anuncio = "gratuito"
 
         if cantidad_fotos == 0:  
-            return "inmueble sin fotos creado con el id: " + nuevo_inmueble_id
+            return "ha publicado un anuncio " +  tipo_anuncio + " sin fotos"
         elif cantidad_fotos > 0:  
             for x in fotos:
                 imagen = Imagen(imagen_url=x, inmueble_id = nuevo_inmueble_id)
                 db.session.add(imagen)
                 db.session.commit()
             # return "inmueble con " + str(cantidad_fotos) + " fotos creado con el id " + str(nuevo_inmueble_id) ### usar este mensaje para pruebas
-            return "se ha publicado una propiedad con " + str(cantidad_fotos) + " fotos"
+            return "ha publicado un anuncio " +  tipo_anuncio
 
 

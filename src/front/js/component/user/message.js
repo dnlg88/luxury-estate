@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../../store/appContext";
 import "../../../styles/messages.css";
+import swal from "sweetalert";
 
 export const Message = () => {
   const { store, actions } = useContext(Context);
@@ -51,9 +52,17 @@ export const Message = () => {
                   <p className="card-text">
                     Quieres darle mayor visibilidad a tu anuncio?
                   </p>
-                  <a href="#" className="btn btn-primary">
+                  <button
+                    onClick={() => {
+                      swal(
+                        "Publica un anuncio Premium",
+                        "Ahora por 29.90 Euros. Solo tienes que ir a la sección Mis Inmuebles y dar click en el enlace de pago del inmueble que quieras visibilizar"
+                      );
+                    }}
+                    className="btn btn-primary"
+                  >
                     Saber más
-                  </a>
+                  </button>
                 </div>
               </div>
             )}

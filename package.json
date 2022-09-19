@@ -73,12 +73,14 @@
 		]
 	},
 	"dependencies": {
-		"@mapbox/mapbox-sdk": "^0.13.4",
-		"mapbox-gl": "^2.10.0",
 		"@cloudinary/react": "^1.4.2",
 		"@cloudinary/url-gen": "^1.8.6",
+		"@mapbox/mapbox-sdk": "^0.13.4",
+		"@stripe/react-stripe-js": "^1.10.0",
+		"@stripe/stripe-js": "^1.36.0",
+		"axios": "^0.27.2",
 		"cloudinary-react": "^1.8.1",
-
+		"mapbox-gl": "^2.10.0",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
