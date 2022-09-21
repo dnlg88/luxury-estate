@@ -7,21 +7,21 @@ import { Properties } from "../component/user/properties";
 import { Edit } from "../component/user/edit";
 import { Publicar } from "../component/user/publicar";
 import "bootswatch/dist/cerulean/bootstrap.min.css";
+import "../../styles/profile.css";
 
 export const Profile = () => {
   const { store, actions } = useContext(Context);
   const userPic = JSON.parse(localStorage.getItem("pub_userpic_url"));
   useEffect(() => {
     actions.syncUserInfo();
-    console.log(userPic);
   }, []);
   return (
     <>
       {localStorage.getItem("token") ? (
         <div className="page-body">
           <div className="container-fluid">
-            <div className="row banner-test d-flex justify-content-around">
-              <div className="col col-sm-3 d-flex justify-content-center ">
+            <div className="row banner-test">
+              <div className="col-sm-3 d-flex justify-content-center">
                 {store.userInfo.imagen_perfil ? (
                   <img
                     src={userPic}
@@ -47,21 +47,24 @@ export const Profile = () => {
                   />
                 )}
               </div>
-              <div className="d-flex col col-sm-6 justify-content-center align-items-center">
-                <h1>{store.userInfo.full_name}</h1>
+              <div className="col-sm-7 text-center">
+                <h3 className="text-white mt-5">Bienvenido</h3>
+                <div className="d-flex justify-content-center align-items-center">
+                  <h1 className="text-white">{store.userInfo.full_name}</h1>
+                </div>
               </div>
             </div>
           </div>
           <div className="container-fluid text-center">
-            <div className="row d-flex justify-content-center">
+            <div className="row">
               <div
-                className="nav flex-column nav-pills align-items-center col col-sm-3 mt-5"
+                className="nav flex-column nav-pills align-items-center col-sm-3 mt-5 pe-sm-0 mb-sm-5 pb-sm-5"
                 id="v-pills-tab"
                 role="tablist"
                 aria-orientation="vertical"
               >
-                <button
-                  className="nav-link active nav-button"
+                <a
+                  className="active side-link"
                   id="v-pills-inmuebles-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#v-pills-inmuebles"
@@ -71,9 +74,9 @@ export const Profile = () => {
                   aria-selected="false"
                 >
                   Mis Inmuebles
-                </button>
-                <button
-                  className="nav-link nav-button"
+                </a>
+                <a
+                  className="side-link"
                   id="v-pills-messages-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#v-pills-messages"
@@ -83,9 +86,9 @@ export const Profile = () => {
                   aria-selected="false"
                 >
                   Mensajes
-                </button>
-                <button
-                  className="nav-link nav-button"
+                </a>
+                <a
+                  className="side-link"
                   id="v-pills-settings-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#v-pills-settings"
@@ -95,9 +98,9 @@ export const Profile = () => {
                   aria-selected="false"
                 >
                   Editar
-                </button>
-                <button
-                  className="nav-link nav-button"
+                </a>
+                <a
+                  className="side-link"
                   id="v-pills-publicar-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#v-pills-publicar"
@@ -107,14 +110,14 @@ export const Profile = () => {
                   aria-selected="false"
                 >
                   Publicar un anuncio
-                </button>
+                </a>
               </div>
               <div
-                class="tab-content d-flex col w-100 mt-5"
+                class="tab-content col-sm-9 col-xxl-7 mt-4 px-sm-0 mt-sm-5 align-items-center justify-content-center"
                 id="v-pills-tabContent"
               >
                 <div
-                  className="tab-pane fade show active "
+                  className="tab-pane fade show active w-100"
                   id="v-pills-inmuebles"
                   role="tabpanel"
                   aria-labelledby="v-pills-inmuebles-tab"
@@ -123,7 +126,7 @@ export const Profile = () => {
                   <Properties />
                 </div>
                 <div
-                  className="tab-pane fade"
+                  className="tab-pane fade w-100"
                   id="v-pills-messages"
                   role="tabpanel"
                   aria-labelledby="v-pills-messages-tab"
@@ -132,7 +135,7 @@ export const Profile = () => {
                   <Message />
                 </div>
                 <div
-                  className="tab-pane fade"
+                  className="tab-pane fade w-100"
                   id="v-pills-settings"
                   role="tabpanel"
                   aria-labelledby="v-pills-settings-tab"

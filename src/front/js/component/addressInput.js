@@ -13,6 +13,7 @@ export const AddressInput = () => {
         placeholder="<Escribe la dirección>"
         {...address}
         isTyping={address.value !== ""}
+        style={{ backgroundColor: "#d2d1d3" }}
       />
       {address.suggestions?.length > 0 && (
         <div className="suggestion-box">

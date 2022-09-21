@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+}
+
+.banner-test {
+  height: 25%;
+  background-color: #123962;
+  padding-bottom: 20px;
+}
+
+.profile-pic {
+  height: auto;
+}
+
+.side-link {
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding-top: 1rem;
+}
+
+.side-link:hover {
+  font-size: 1.35rem;
+}
+
+.card-propiedad {
+  opacity: 0.9;
+}
+.card-mensaje {
+  opacity: 0.9;
+}
+.card-propiedad:hover {
+  opacity: 1;
+  transform: translateY(5px);
+}
+.card-mensaje:hover {
+  opacity: 1;
+  transform: translateY(5px);
+}
+
+.list-group > input {
+  background-color: #d2d1d3;
+}
+.fotos_input > input {
+  background-color: #d2d1d3;
+}
+.password-box > input {
+  background-color: #d2d1d3;
+}
+
+.contenedor-propiedades {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+
+.contenedor-propiedades::-webkit-scrollbar {
+  width: 7px;
+  background: rgb(237, 237, 237);
+  border-radius: 7px;
+}
+.contenedor-propiedades::-webkit-scrollbar-thumb {
+  width: 7px;
+  background: rgb(196, 196, 196);
+  border-radius: 7px;
+}
+.card-mensaje {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+
+.card-mensaje::-webkit-scrollbar {
+  width: 7px;
+  background: rgb(237, 237, 237);
+  border-radius: 7px;
+}
+.card-mensaje::-webkit-scrollbar-thumb {
+  width: 7px;
+  background: rgb(196, 196, 196);
+  border-radius: 7px;
+}

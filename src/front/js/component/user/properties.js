@@ -16,41 +16,25 @@ export const Properties = () => {
   }, []);
 
   return (
-    <>
+    <div className="w-90 mb-5">
       {!isloading ? (
-        <div
-          className="d-flex justify-content-center"
-          style={{ height: "90vh", width: "70vw" }}
-        >
-          <div
-            style={{
-              height: "80%",
-              width: "100%",
-              overflowX: "auto",
-              overflowY: "auto",
-              textAlign: "center",
-            }}
-          >
-            {properties ? (
-              properties.map((property, i) => (
-                <div
-                  className="card text-bg-dark mb-3"
-                  style={{ maxWidth: "100%" }}
-                  key={i}
-                >
-                  <div className="card-header">
-                    {/* <div className="col-3">
+        <div className="contenedor-propiedades">
+          {properties ? (
+            properties.map((property, i) => (
+              <div className="card-propiedad card text-bg-dark mb-3" key={i}>
+                <div className="card-header">
+                  {/* <div className="col-3">
                       {`Anuncio ${
                         property.premium == true ? "Premium" : "Gratuito"
                       }`}
                     </div> */}
 
-                    <div className="">
-                      <h3>{property.comunidad}</h3>
-                      {property.direccion}u
-                    </div>
+                  <div className="">
+                    <h3>{property.comunidad}</h3>
+                    {property.direccion}
+                  </div>
 
-                    {/* <div className="col-3">
+                  {/* <div className="col-3">
                       {property.premium == false ? (
                         <button className="btn btn-success">
                           Cambiar a Premium
@@ -59,43 +43,37 @@ export const Properties = () => {
                         ""
                       )}
                     </div> */}
-                  </div>
+                </div>
 
-                  <div className="card-body">
-                    <img
-                      src={property.fotos[0]}
-                      className="img-thumbnail rounded float-start"
-                      style={{ width: "200px", height: "200px" }}
-                    />
-                    <div className="d-flex justify-content-evenly">
-                      <h5 className="card-title">{property.tipo_operacion}</h5>
-                      <h5 className="card-title">{property.tipo_vivienda}</h5>
-                      <h5 className="card-title">
-                        {property.habitaciones} hab.
-                      </h5>
-                      <h5 className="card-title ">{property.baños} baños</h5>
-                    </div>
-                    <div className="d-flex justify-content-center">
-                      <h5 className="text-muted">
-                        <br /> {property.descripcion}
-                      </h5>
-                    </div>
+                <div className="card-body">
+                  <img
+                    src={property.fotos[0]}
+                    className="img-thumbnail rounded float-start"
+                    style={{ width: "200px", height: "200px" }}
+                  />
+                  <div className="d-flex justify-content-evenly">
+                    <h5 className="card-title">{property.tipo_operacion}</h5>
+                    <h5 className="card-title">{property.tipo_vivienda}</h5>
+                    <h5 className="card-title">{property.habitaciones} hab.</h5>
+                    <h5 className="card-title ">{property.baños} baños</h5>
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    <h5 className="text-muted">
+                      <br /> {property.descripcion}
+                    </h5>
                   </div>
                 </div>
-              ))
-            ) : (
-              <div>No hay propiedades</div>
-            )}
-          </div>
+              </div>
+            ))
+          ) : (
+            <div>No hay propiedades</div>
+          )}
         </div>
       ) : (
-        <div
-          className="d-flex justify-content-center"
-          style={{ height: "90vh", width: "1200px" }}
-        >
-          <h5>Loading...</h5>
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
       )}
-    </>
+    </div>
   );
 };

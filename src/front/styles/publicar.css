@@ -13,3 +13,16 @@
   background: rgb(196, 196, 196);
   border-radius: 7px;
 }
+
+.selector > select {
+  background-color: #d2d1d3;
+}
+.input-precio > input {
+  background-color: #d2d1d3;
+}
+.input-municipio > input {
+  background-color: #d2d1d3;
+}
+.input-descripcion > textarea {
+  background-color: #d2d1d3;
+}

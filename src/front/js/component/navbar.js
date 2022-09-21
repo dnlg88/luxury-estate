@@ -20,7 +20,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark mb-2">
+    <nav className="navbar navbar-dark bg-dark">
       <div className="container">
         <Link to="/" className="text-decoration-none">
           <span onClick={handleClick} className="mb-0">
