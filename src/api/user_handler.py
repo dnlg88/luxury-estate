@@ -90,3 +90,8 @@ class User_Handler:
         db.session.delete(user)
         db.session.commit()
         return "user deleted"
+    
+    def get_user(self, id):
+        user = User.query.filter_by(id = id).first()
+        user_info = user.serialize()
+        return user_info

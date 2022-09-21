@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: null,
       userInfo: {},
+      ownerInfo: {},
       messages: [],
       userProperties: [],
       userPropertiesImages: [],
@@ -1052,6 +1053,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         await getActions().switchOffCharging();
         await getActions().resetStoreVariables();
         await getActions().clearLocalStorageNoUser();
+      },
+
+      getPropertyOwner: async (id) => {
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/getuser/" + id
+          );
+          if (resp.status != 200) {
+            throw new Error("The fetch has failed");
+          }
+          const data = await resp.json();
+          console.log(data);
+          setStore({ ownerInfo: data });
+          localStorage.setItem("ownerInfo", JSON.stringify(data));
+        } catch (error) {
+          console.log("The fetch has failed: ", error);
+        }
       },
 
       // clearPubFromLocalStorage: () => {  DEPRECADO por clearLocalStorageNoUser
