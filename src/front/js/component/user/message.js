@@ -20,11 +20,11 @@ export const Message = () => {
   return (
     <>
       {!isloading ? (
-        <div className="w-90">
+        <div className="w-90 contenedor-mensajes mb-5">
           {messages ? (
             messages.map((message, i) => (
               <div
-                className="card card-mensaje text-bg-dark mb-5 w-100"
+                className="card card-mensaje text-bg-dark mb-2 w-100"
                 key={i}
               >
                 <div className="card-header">{message.sender_name}</div>

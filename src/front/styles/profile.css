@@ -62,18 +62,19 @@ body {
   background: rgb(196, 196, 196);
   border-radius: 7px;
 }
-.card-mensaje {
+.contenedor-mensajes {
   max-height: 70vh;
   overflow-y: scroll;
 }
 
-.card-mensaje::-webkit-scrollbar {
+.contenedor-mensajes::-webkit-scrollbar {
   width: 7px;
   background: rgb(237, 237, 237);
   border-radius: 7px;
 }
-.card-mensaje::-webkit-scrollbar-thumb {
+.contenedor-mensajes::-webkit-scrollbar-thumb {
   width: 7px;
+  height: 100px;
   background: rgb(196, 196, 196);
   border-radius: 7px;
 }
