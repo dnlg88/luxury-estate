@@ -139,7 +139,7 @@ export const Single = () => {
               <div className="características wrap pt-2">
                 <h5 className="">Características:</h5>
                 <h5 className="px-4">{`- Habitaciones: ${elemento.habitaciones}`}</h5>
-                <h5 className="px-4">{`- Baños: ${elemento.aseos}`}</h5>
+                <h5 className="px-4">{`- Baños: ${elemento.baños}`}</h5>
                 {elemento.piscina ? <h5 className="px-4">- Piscina</h5> : ""}
                 {elemento.terraza ? <h5 className="px-4">- Terraza</h5> : ""}
                 {elemento.garage ? (

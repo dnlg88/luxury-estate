@@ -1,6 +1,6 @@
 .formulario {
   width: auto;
-  background: rgb(172, 255, 255);
+  background: RGB(177, 212, 229);
   height: fit-content;
 }
 .titulo {
@@ -23,7 +23,7 @@
 }
 .filtros-aside::-webkit-scrollbar-thumb {
   width: 7px;
-  background: rgb(147, 220, 244);
+  background: rgb(161, 161, 161);
   border-radius: 7px;
 }
 .contenedor-tablero {
@@ -60,4 +60,11 @@
   background-position-y: center;
   background-repeat: no-repeat;
   height: 40vh;
+}
+.cajita_logo {
+  background-size: contain;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  height: 5vw;
 }
