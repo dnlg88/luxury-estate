@@ -98,7 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       tipo_vivienda: "",
       longitude: 0,
       latitude: 0,
-      municipio: "",
+      // municipio: "",
       direccion: "",
       descripcion: "",
       precio: "",
@@ -106,7 +106,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       inmueblesBodyRequest: {},
       charging: false,
       response_publicar: "",
-
+      bodyPubCreated: "off",
+      pubSuccess: "",
       /*------------------------------ fin de VARIABLES ADICIONALES DE PUBLICACION -----------------------------------------------------*/
     },
     //
@@ -432,14 +433,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("pub_provincia", e.target.value);
       },
 
-      updatePublicarMunicipio: (e) => {
-        let muni = e.target.value;
-        let capital = muni.charAt(0).toUpperCase();
-        let resto = muni.slice(1).toLowerCase();
-        let municipio = capital + resto;
-        localStorage.setItem("pub_municipio", municipio);
-        setStore({ municipio: municipio });
-      },
+      // updatePublicarMunicipio: (e) => {
+      //   let muni = e.target.value;
+      //   let capital = muni.charAt(0).toUpperCase();
+      //   let resto = muni.slice(1).toLowerCase();
+      //   let municipio = capital + resto;
+      //   localStorage.setItem("pub_municipio", municipio);
+      //   setStore({ municipio: municipio });
+      // },
 
       updatePublicarDireccion: () => {
         setStore({ direccion: localStorage.getItem("pub_direccion") });
@@ -760,7 +761,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ tipo_vivienda: "" });
         setStore({ longitude: 0 });
         setStore({ latitude: 0 });
-        setStore({ municipio: "" });
+        // setStore({ municipio: "" });
         setStore({ direccion: "" });
         setStore({ descripcion: "" });
         setStore({ precio: "" });
@@ -903,7 +904,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           "pub_operacion",
           "pub_comunidad",
           "pub_provincia",
-          "pub_municipio",
+          // "pub_municipio",
           "pub_direccion",
           "pub_descripcion",
           "pub_precio",
@@ -933,7 +934,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           localStorage.getItem("pub_operacion") == undefined ||
           localStorage.getItem("pub_comunidad") == undefined ||
           localStorage.getItem("pub_provincia") == undefined ||
-          localStorage.getItem("pub_municipio") == undefined ||
+          // localStorage.getItem("pub_municipio") == undefined ||
           localStorage.getItem("pub_descripcion") == undefined ||
           localStorage.getItem("pub_precio") == undefined ||
           localStorage.getItem("pub_vivienda") == undefined ||
@@ -947,7 +948,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "pub_operacion",
             "pub_comunidad",
             "pub_provincia",
-            "pub_municipio",
+            // "pub_municipio",
             "pub_direccion",
             "pub_longitude",
             "pub_latitude",
@@ -980,6 +981,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           aux["fotos"] = store.receivedUrls;
           setStore({ inmueblesBodyRequest: aux });
+          setStore({ bodyPubCreated: "On" });
+
           console.log(
             "este es el request para publicar el inmueble: " +
               JSON.stringify(store.inmueblesBodyRequest)
@@ -1073,8 +1076,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
         } else if (resp.status == 200) {
           await swal("Felicitaciones!", store.response_publicar);
+          setStore({ pubSuccess: "Yes" });
         } else {
-          await swal("error: no se ha podido publicar el anuncio");
+          await swal(
+            "error",
+            "no es posible publicar el anuncio, verifica tus datos"
+          );
         }
         await getActions().switchOffCharging();
         await getActions().resetStoreVariables();
