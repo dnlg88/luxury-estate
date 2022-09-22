@@ -33,7 +33,7 @@ export const Edit = () => {
       if (store.selectedImages.length != 0) {
         await actions.uploadProfilePicToCloudinary();
       }
-      const fotoUrl = localStorage.getItem("pub_userpic_url");
+      const fotoUrl = JSON.parse(localStorage.getItem("pub_userpic_url"));
       console.log(fotoUrl);
       const resp = await actions.updateUser(fullName, email, password, fotoUrl);
       if (resp.message == "Nothing to update") {

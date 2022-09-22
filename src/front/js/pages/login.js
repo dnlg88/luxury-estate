@@ -21,10 +21,10 @@ export const Login = (props) => {
       ) : (
         <div className="container text-center">
           <div className="row justify-content-center mt-5">
-            <div className="col-6 my-5">
-              <div className="card text-bg-dark">
+            <div className="col-md-6 my-5 pb-5">
+              <div className="card text-bg-secondary mb-5 pb-5">
                 <div className="card-body">
-                  <h5 className="card-title text-white fw-bold pb-2 border-bottom">
+                  <h5 className="card-title text-black fw-bold pb-2 border-bottom">
                     Login
                   </h5>
                   <p className="card-text">Welcome back!</p>

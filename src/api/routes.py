@@ -95,7 +95,6 @@ def upload_file():
 def edit_user():
     current_user_id = get_jwt_identity()
     request_body = request.get_json()
-    print(request_body)
     response = user_handler.edit_user(request_body, current_user_id)
     return jsonify(response), 200
 
