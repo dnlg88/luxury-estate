@@ -62,8 +62,9 @@ export const CheckoutForm = () => {
     await handleCard();
     await actions.handlePublish();
     const user = JSON.parse(localStorage.getItem("user_info"));
-
-    navigate(`/user/${user.id}`);
+    if (store.pubSuccess == "Yes") {
+      navigate(`/user/${user.id}`);
+    }
   };
 
   return (

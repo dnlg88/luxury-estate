@@ -116,12 +116,7 @@ export const Single = () => {
                 <h2 className="card-title fw-bold pb-3 text-black">
                   Descripción de la Propiedad:
                 </h2>
-                <h5 className=" text-black">{`Ubicación: ${
-                  elemento.tipo_vivienda
-                } en ${elemento.direccion}, Municipio de ${
-                  elemento.municipio.charAt(0).toUpperCase() +
-                  elemento.municipio.slice(1)
-                }`}</h5>
+                <h5 className=" text-black">{`Ubicación: ${elemento.tipo_vivienda} en ${elemento.direccion}`}</h5>
                 <h5 className=" text-black">{`Provincia: ${elemento.provincia}`}</h5>
                 <h5 className=" text-black">{`Comunidad Autónoma: ${elemento.comunidad}`}</h5>
                 <h5 className="text-black fw-bolder">
