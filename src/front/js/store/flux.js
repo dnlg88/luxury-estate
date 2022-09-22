@@ -106,6 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       inmueblesBodyRequest: {},
       charging: false,
       response_publicar: "",
+      bodyPubCreated: "off",
 
       /*------------------------------ fin de VARIABLES ADICIONALES DE PUBLICACION -----------------------------------------------------*/
     },
@@ -980,6 +981,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           aux["fotos"] = store.receivedUrls;
           setStore({ inmueblesBodyRequest: aux });
+          setStore({ bodyPubCreated: "On" });
+
           console.log(
             "este es el request para publicar el inmueble: " +
               JSON.stringify(store.inmueblesBodyRequest)
@@ -1074,7 +1077,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else if (resp.status == 200) {
           await swal("Felicitaciones!", store.response_publicar);
         } else {
-          await swal("error: no se ha podido publicar el anuncio");
+          await swal(
+            "error",
+            "no es posible publicar el anuncio, verifica tus datos"
+          );
         }
         await getActions().switchOffCharging();
         await getActions().resetStoreVariables();

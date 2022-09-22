@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../../store/appContext";
 import swal from "sweetalert";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Message = () => {
   const { store, actions } = useContext(Context);

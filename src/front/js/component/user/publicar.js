@@ -15,13 +15,16 @@ export const Publicar = () => {
 
   const handleClickAlt = async () => {
     await actions.createInmueblesBodyRequest();
-    navigate("/pasarela");
+    if (store.bodyPubCreated == "On") {
+      navigate("/pasarela");
+    }
   };
 
   const handleClick1 = async () => {
     actions.switchOnCharging();
     await actions.uploadImagesToCloudinary();
-    actions.createInmueblesBodyRequest(); // testeado hasta aqui
+    actions.createInmueblesBodyRequest();
+
     // aqui comienza el fetch publicar:
     const request = store.inmueblesBodyRequest;
     let opts = {
@@ -47,7 +50,10 @@ export const Publicar = () => {
     if (store.response_publicar != "") {
       await swal("Felicitaciones!", store.response_publicar);
     } else {
-      await swal("error: no se ha podido publicar el anuncio");
+      await swal(
+        "error",
+        "no es posible publicar el anuncio, verifica tus datos"
+      );
     }
     await actions.switchOffCharging();
     await actions.resetStoreVariables();
@@ -76,10 +82,10 @@ export const Publicar = () => {
             <div className="container rounded-3 pb-4 pt-3 px-0 text-bg-secondary">
               <h4 className="text-center mt-3 mb-4 fw-bold">Tu Publicación</h4>
               <div className="caja_selectores container pt-0 pb-2 ">
-                <div className="container d-flex justify-content-around">
+                <div className="container d-flex justify-content-between ">
                   {/* operación */}
-                  <div className="selector ms-0 mb-3 me-2">
-                    <div className="pb-2">
+                  <div className="selector ms-1 mb-3 me-2 col-5">
+                    <div className="pb-2 text-start">
                       <span className="">Operación</span>
                     </div>
                     <select
@@ -116,10 +122,10 @@ export const Publicar = () => {
                   </div>
 
                   {/* precio */}
-                  <div className="mb-3 ms-2 me-1 input-precio">
+                  <div className="mb-3 ms-2 me-1 input-precio col-5  text-start">
                     <label
                       for="exampleFormControlInput1"
-                      className="form-label"
+                      className="form-label "
                     >
                       Precio (Euros)
                     </label>
@@ -136,7 +142,7 @@ export const Publicar = () => {
 
                 {/* comunidad autónoma */}
                 <div className="selector mx-3 mb-3">
-                  <div className="pb-2">
+                  <div className="pb-2 text-start">
                     <span className="">Comunidad Autónoma</span>
                   </div>
                   <select
@@ -161,7 +167,7 @@ export const Publicar = () => {
 
                 {/* provincia */}
                 <div className="selector mx-3 mb-3">
-                  <div className="pb-2">
+                  <div className="pb-2 text-start">
                     <span className="">Provincia</span>
                   </div>
                   <select
@@ -180,7 +186,7 @@ export const Publicar = () => {
                 </div>
 
                 {/* municipio */}
-                <div className="mb-3 mx-3 input-municipio">
+                <div className="mb-3 mx-3 input-municipio text-start">
                   <label for="exampleFormControlInput1" className="form-label">
                     Municipio
                   </label>
@@ -195,7 +201,7 @@ export const Publicar = () => {
                 </div>
 
                 {/* direccion */}
-                <div className="mb-3 mx-3 input-direccion">
+                <div className="mb-3 mx-3 input-direccion text-start">
                   <label for="exampleFormControlInput1" className="form-label">
                     Dirección
                   </label>
@@ -213,7 +219,7 @@ export const Publicar = () => {
                 </div>
 
                 {/* tipo vivienda */}
-                <div className="selector mx-3 mb-3">
+                <div className="selector mx-3 mb-3 text-start">
                   <div className="pb-2">
                     <span className="">Tipo de Vivienda</span>
                   </div>
@@ -235,14 +241,14 @@ export const Publicar = () => {
                 <div className="caract_ambien d-flex">
                   {/* caracteristicas */}
                   <div className="selector mx-3 mb-3 col-5">
-                    <div className="pb-2">
+                    <div className="pb-2 text-start">
                       <span className="">Características</span>
                     </div>
 
                     {store.operacion == "compra" ? (
                       ""
                     ) : (
-                      <div className="form-check">
+                      <div className="form-check text-start">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -255,7 +261,7 @@ export const Publicar = () => {
                       </div>
                     )}
 
-                    <div className="form-check">
+                    <div className="form-check text-start">
                       <input
                         className="form-check-input"
                         type="checkbox"
@@ -264,7 +270,7 @@ export const Publicar = () => {
                       />
                       <label className="form-check-label">Garage</label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check text-start">
                       <input
                         className="form-check-input"
                         type="checkbox"
@@ -273,7 +279,7 @@ export const Publicar = () => {
                       />
                       <label className="form-check-label">Piscina</label>
                     </div>
-                    <div className="form-check">
+                    <div className="form-check text-start">
                       <input
                         className="form-check-input"
                         type="checkbox"
@@ -287,7 +293,7 @@ export const Publicar = () => {
                   <div className="ambientes col-6 pe-0 me-0">
                     {/* habitaciones */}
                     <div className="selector mx-3 mb-3">
-                      <div className="pb-2">
+                      <div className="pb-2 text-start">
                         <span className="">Habitaciones</span>
                       </div>
                       <select
@@ -311,7 +317,7 @@ export const Publicar = () => {
 
                     {/* baños */}
                     <div className="selector mx-3 mb-3">
-                      <div className="pb-2">
+                      <div className="pb-2 text-start">
                         <span className="">Baños</span>
                       </div>
                       <select
@@ -332,7 +338,7 @@ export const Publicar = () => {
                 </div>
 
                 {/* -------------------- descripción ------------------------- */}
-                <div className="mb-3 mx-3 input-descripcion">
+                <div className="mb-3 mx-3 input-descripcion text-start">
                   <label
                     for="exampleFormControlTextarea1"
                     className="form-label"
@@ -351,7 +357,7 @@ export const Publicar = () => {
 
                 {/* --------------------------- fotos --------------------------------- */}
                 {store.selectedImages.length == 0 ? (
-                  <div className="fotos_input mx-3 mb-3">
+                  <div className="fotos_input mx-3 mb-3 text-start">
                     <label for="formFileMultiple" className="form-label pb-2">
                       Fotos de la propiedad
                     </label>
@@ -369,7 +375,7 @@ export const Publicar = () => {
                       Fotos de la propiedad
                     </label>
                     <div className="caja-reemplazo d-flex justify-content-between">
-                      <div className="ps-3">{`>> Carga realizada: ${store.selectedImages.length} foto(s)`}</div>
+                      <div className="ps-3 text-start">{`>> Carga realizada: ${store.selectedImages.length} foto(s)`}</div>
                       <div>
                         <button
                           onClick={actions.clearSelectedImages}
@@ -386,7 +392,7 @@ export const Publicar = () => {
                 {/* ------------------ switch premium ----------------- */}
 
                 <div className="mb-3  mx-3">
-                  <div className="form-check form-switch">
+                  <div className="form-check form-switch text-start">
                     <input
                       onChange={actions.updatePublicarPremium}
                       className="form-check-input"
