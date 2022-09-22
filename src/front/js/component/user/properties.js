@@ -16,12 +16,15 @@ export const Properties = () => {
   }, []);
 
   return (
-    <div className="w-90 mb-5">
+    <div className="mb-5">
       {!isloading ? (
         <div className="contenedor-propiedades">
           {properties ? (
             properties.map((property, i) => (
-              <div className="card-propiedad card text-bg-dark mb-3" key={i}>
+              <div
+                className="card-propiedad card text-bg-secondary mb-3"
+                key={i}
+              >
                 <div className="card-header">
                   {/* <div className="col-3">
                       {`Anuncio ${
@@ -30,7 +33,7 @@ export const Properties = () => {
                     </div> */}
 
                   <div className="">
-                    <h3>{property.comunidad}</h3>
+                    <h3 className="fw-bold">{property.comunidad}</h3>
                     {property.direccion}
                   </div>
 
@@ -46,21 +49,33 @@ export const Properties = () => {
                 </div>
 
                 <div className="card-body">
-                  <img
-                    src={property.fotos[0]}
-                    className="img-thumbnail rounded float-start"
-                    style={{ width: "200px", height: "200px" }}
-                  />
-                  <div className="d-flex justify-content-evenly">
-                    <h5 className="card-title">{property.tipo_operacion}</h5>
-                    <h5 className="card-title">{property.tipo_vivienda}</h5>
-                    <h5 className="card-title">{property.habitaciones} hab.</h5>
-                    <h5 className="card-title ">{property.baños} baños</h5>
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    <h5 className="text-muted">
-                      <br /> {property.descripcion}
-                    </h5>
+                  <div className="row justify-content-center">
+                    <div className="col-sm-12 col-xl-9 d-flex justify-content-center mb-3 mb-sm-0">
+                      <img
+                        src={property.fotos[0]}
+                        className="img-thumbnail rounded"
+                        style={{ width: "70%", height: "auto" }}
+                      />
+                    </div>
+                    <div className="col-sm-12">
+                      <div className=" d-flex justify-content-around mt-4">
+                        <h5 className="card-title fw-bold">
+                          {property.tipo_operacion}
+                        </h5>
+                        <h5 className="card-title fw-bold">
+                          {property.tipo_vivienda}
+                        </h5>
+                        <h5 className="card-title fw-bold">
+                          {property.habitaciones} hab.
+                        </h5>
+                        <h5 className="card-title fw-bold">
+                          {property.baños} baños
+                        </h5>
+                      </div>
+                      <h5 className="text-black mt-1">
+                        {property.descripcion}
+                      </h5>
+                    </div>
                   </div>
                 </div>
               </div>

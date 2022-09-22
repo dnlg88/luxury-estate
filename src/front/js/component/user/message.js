@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../../store/appContext";
-import "../../../styles/messages.css";
 import swal from "sweetalert";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Message = () => {
   const { store, actions } = useContext(Context);
@@ -18,22 +18,29 @@ export const Message = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ minWidth: "70%" }}>
       {!isloading ? (
-        <div className="w-90 contenedor-mensajes mb-5">
+        <div className="contenedor-mensajes mb-5">
           {messages ? (
             messages.map((message, i) => (
               <div
-                className="card card-mensaje text-bg-dark mb-2 w-100"
+                className="card card-mensaje text-bg-secondary mb-2 "
                 key={i}
               >
-                <div className="card-header">{message.sender_name}</div>
+                <div className="card-header">
+                  <h3 className="fw-semibold">{message.sender_name}</h3>
+                </div>
                 <div className="card-body">
-                  <h5 className="card-title">{message.sender_email}</h5>
-                  <h5 className="card-title text-muted">
-                    {message.sender_phone}
-                  </h5>
-                  <p className="card-text">{message.body}</p>
+                  <div className="d-flex justify-content-around">
+                    <h5 className="card-title fw-bold text-black">
+                      <i className="fa-regular fa-envelope" />{" "}
+                      {message.sender_email}
+                    </h5>
+                    <h5 className="card-title text-black fw-bold">
+                      <i class="fa-solid fa-phone" /> {message.sender_phone}
+                    </h5>
+                  </div>
+                  <p className="card-text fw-normal fs-4">{message.body}</p>
                 </div>
               </div>
             ))
@@ -67,6 +74,6 @@ export const Message = () => {
           <span class="visually-hidden">Loading...</span>
         </div>
       )}
-    </>
+    </div>
   );
 };

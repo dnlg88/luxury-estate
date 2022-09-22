@@ -50,12 +50,14 @@ export const Profile = () => {
               <div className="col-sm-7 text-center">
                 <h3 className="text-white mt-5">Bienvenido</h3>
                 <div className="d-flex justify-content-center align-items-center">
-                  <h1 className="text-white">{store.userInfo.full_name}</h1>
+                  <h1 className="text-white fw-bold">
+                    {store.userInfo.full_name}
+                  </h1>
                 </div>
               </div>
             </div>
           </div>
-          <div className="container-fluid text-center">
+          <div className="container-fluid text-center bg-light">
             <div className="row">
               <div
                 className="nav flex-column nav-pills align-items-center col-sm-3 mt-5 pe-sm-0 mb-sm-5 pb-sm-5"
@@ -144,7 +146,7 @@ export const Profile = () => {
                   <Edit />
                 </div>
                 <div
-                  className="tab-pane fade pb-5"
+                  className="tab-pane fade pb-5 w-100"
                   id="v-pills-publicar"
                   role="tabpanel"
                   aria-labelledby="v-pills-publicar-tab"

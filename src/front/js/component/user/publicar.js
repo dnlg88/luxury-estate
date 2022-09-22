@@ -66,19 +66,17 @@ export const Publicar = () => {
   }, []);
 
   return (
-    <div className="w-90">
+    <div className="row">
       {localStorage.getItem("token") ? (
         <div
-          className="caja_publicar d-flex justify-content-center col-6"
+          className="caja_publicar d-flex justify-content-center col-sm-6"
           style={{ height: "75vh", width: "100vh" }}
         >
-          <div className="container col-8 px-0 mt-0 pb-3">
-            <div className="container rounded-3 pb-4 pt-3 px-0 text-bg-dark">
-              <h4 className="text-center mt-3 mb-4 text-white fw-bold">
-                Tu Publicación
-              </h4>
-              <div className="caja_selectores container pt-0 pb-2 text-bg-dark">
-                <div className="container d-flex">
+          <div className="container col-8 px-0 mt-0 pb-3 w-100 w-md-50">
+            <div className="container rounded-3 pb-4 pt-3 px-0 text-bg-secondary">
+              <h4 className="text-center mt-3 mb-4 fw-bold">Tu Publicación</h4>
+              <div className="caja_selectores container pt-0 pb-2 ">
+                <div className="container d-flex justify-content-around">
                   {/* operación */}
                   <div className="selector ms-0 mb-3 me-2">
                     <div className="pb-2">
@@ -461,7 +459,7 @@ export const Publicar = () => {
                       <button
                         onClick={handleClick2}
                         type="button"
-                        className="btn btn-danger mb-3 mt-3"
+                        className="btn btn-info mb-3 mt-3"
                       >
                         Reiniciar
                       </button>
@@ -481,7 +479,6 @@ export const Publicar = () => {
           <h5>Unauthorized...</h5>
         </div>
       )}
-      ;
     </div>
   );
 

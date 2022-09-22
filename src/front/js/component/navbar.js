@@ -32,7 +32,7 @@ export const Navbar = () => {
         {store.token ? (
           <div className="d-flex">
             <Link to={`/user/${userInfo.id}`}>
-              {store.userInfo.imagen_perfil ? (
+              {userInfo.imagen_perfil ? (
                 <img
                   src={JSON.parse(localStorage.getItem("pub_userpic_url"))}
                   className="img-fluid"
@@ -60,7 +60,7 @@ export const Navbar = () => {
             </Link>
             <ul className="dropdown ps-0">
               <a
-                className="nav-link dropdown-toggle text-decoration-none"
+                className="nav-link dropdown-toggle text-decoration-none text-white pt-3 ps-1"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"

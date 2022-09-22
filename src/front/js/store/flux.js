@@ -244,6 +244,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ token: token });
         console.log("getting token from local storage");
       },
+      validateToken: async () => {
+        const opts = {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        };
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/getmessages",
+            opts
+          );
+          if (resp.status !== 200) {
+            throw new Error("Something went wrong");
+          }
+          const data = await resp.json();
+          if (data.msg == "Token has expired") {
+            getActions().logout();
+            return true;
+          } else {
+            return true;
+          }
+        } catch (e) {
+          console.log(`${e.name}: ${e.message}`);
+        }
+      },
       logout: () => {
         localStorage.removeItem("token");
         localStorage.removeItem("messages");

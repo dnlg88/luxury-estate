@@ -51,36 +51,36 @@ export const Edit = () => {
   };
 
   return (
-    <div className="w-90">
+    <div className="d-flex justify-content-center">
       {localStorage.getItem("token") ? (
-        <div className="card text-bg-dark mb-5">
+        <div className="card text-bg-secondary mb-5 w-sm-50">
           <div className="card-body text-center">
-            <h5 className="card-title fw-bold text-white">Cambia tus datos</h5>
+            <h5 className="card-title fw-bold text-black">Cambia tus datos</h5>
           </div>
           <ul className="list-group list-group-flush">
-            <input
-              className="list-group-item"
-              value={fullName}
-              required
-              style={{ width: "100%" }}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="Full Name"
-            />
-            <input
-              className="list-group-item"
-              value={email}
-              required
-              type="email"
-              style={{ width: "100%" }}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
+            <div className="d-flex flex-column align-items-center">
+              <input
+                className="list-group-item w-100"
+                value={fullName}
+                required
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Full Name"
+              />
+              <input
+                className="list-group-item w-100"
+                value={email}
+                required
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
+            </div>
             <div className="fotos_input mx-3 mb-2 mt-2">
               <label for="formFile" className="form-label pb-2">
                 Subir foto de perfil
               </label>
               <input
-                className="form-control"
+                className="form-control w-100"
                 id="formFile"
                 multiple
                 type="file"
@@ -98,7 +98,7 @@ export const Edit = () => {
                   placeholder="Nueva Contraseña"
                 />
                 <input
-                  className="list-group-item w-100"
+                  className="list-group-item w-50"
                   value={confirmPassword}
                   required
                   type="password"
@@ -134,7 +134,7 @@ export const Edit = () => {
             )}
           </ul>
           <div className="card-body text-center">
-            <a href="#" className="btn btn-success" onClick={handleSubmit}>
+            <a href="#" className="btn btn-info" onClick={handleSubmit}>
               Save
             </a>
           </div>

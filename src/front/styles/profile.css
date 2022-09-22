@@ -4,8 +4,22 @@ body {
 
 .banner-test {
   height: 25%;
-  background-color: #123962;
   padding-bottom: 20px;
+  background: linear-gradient(-45deg, #123962, #2754ba, #799eb2, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .profile-pic {
@@ -35,16 +49,6 @@ body {
 .card-mensaje:hover {
   opacity: 1;
   transform: translateY(5px);
-}
-
-.list-group > input {
-  background-color: #d2d1d3;
-}
-.fotos_input > input {
-  background-color: #d2d1d3;
-}
-.password-box > input {
-  background-color: #d2d1d3;
 }
 
 .contenedor-propiedades {

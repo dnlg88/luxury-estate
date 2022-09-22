@@ -4,25 +4,10 @@
 }
 .caja_selectores::-webkit-scrollbar {
   width: 7px;
-  background: rgb(237, 237, 237);
   border-radius: 7px;
 }
 .caja_selectores::-webkit-scrollbar-thumb {
   width: 7px;
   height: 100px;
-  background: rgb(196, 196, 196);
   border-radius: 7px;
-}
-
-.selector > select {
-  background-color: #d2d1d3;
-}
-.input-precio > input {
-  background-color: #d2d1d3;
-}
-.input-municipio > input {
-  background-color: #d2d1d3;
-}
-.input-descripcion > textarea {
-  background-color: #d2d1d3;
 }
