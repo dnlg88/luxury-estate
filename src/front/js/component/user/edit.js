@@ -4,10 +4,12 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 
 export const Edit = () => {
+  const infoFromStorage = JSON.parse(localStorage.getItem("user_info"));
   const { store, actions } = useContext(Context);
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState(localStorage.getItem("full_name"));
-  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState(infoFromStorage.full_name);
+  const [email, setEmail] = useState(infoFromStorage.email);
   const [changePassword, setChangePassword] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
   const navigate = useNavigate();
@@ -15,6 +17,8 @@ export const Edit = () => {
   const handleSubmit = async () => {
     if (changePassword && password.length < 8) {
       swal("La contraseña debe tener al menos 8 caracteres");
+    } else if (changePassword && password !== confirmPassword) {
+      swal("Las contraseñas no coinciden");
       return false;
     } else if (!email || !fullName) {
       swal("Debe rellenar todos los campos");
@@ -23,9 +27,15 @@ export const Edit = () => {
     if (
       fullName !== localStorage.getItem("full_name") ||
       email !== localStorage.getItem("email") ||
-      password
+      password ||
+      store.selectedImages.length > 0
     ) {
-      const resp = await actions.updateUser(fullName, email, password);
+      if (store.selectedImages.length != 0) {
+        await actions.uploadProfilePicToCloudinary();
+      }
+      const fotoUrl = localStorage.getItem("pub_userpic_url");
+      console.log(fotoUrl);
+      const resp = await actions.updateUser(fullName, email, password, fotoUrl);
       if (resp.message == "Nothing to update") {
         swal("nada que actualizar");
         setPassword("");
@@ -41,78 +51,92 @@ export const Edit = () => {
   };
 
   return (
-    <>
+    <div className="d-flex justify-content-center">
       {localStorage.getItem("token") ? (
-        <div
-          className="d-flex justify-content-center col-md-12 mb-5"
-          style={{ height: "90vh", width: "70vw" }}
-        >
-          <div className="col-md-8 mt-5">
-            <div className="card">
-              <div className="card-body text-center">
-                <h5 className="card-title">Cambia tus datos</h5>
-              </div>
-              <ul className="list-group list-group-flush">
-                <input
-                  className="list-group-item"
-                  value={fullName}
-                  required
-                  style={{ width: "100%" }}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Full Name"
-                />
-                <input
-                  className="list-group-item"
-                  value={email}
-                  required
-                  type="email"
-                  style={{ width: "100%" }}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
-                />
-                {changePassword ? (
-                  <input
-                    className="list-group-item"
-                    value={password}
-                    required
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="New Password"
-                  />
-                ) : (
-                  <a
-                    href="#"
-                    className="card-link btn btn-outline-success"
-                    onClick={() => setChangePassword(true)}
-                  >
-                    Change Password
-                  </a>
-                )}
-                {deleteUser ? (
-                  <a
-                    href="#"
-                    className="card-link btn btn-outline-danger"
-                    onClick={actions.deleteUser}
-                  >
-                    Confirmar
-                  </a>
-                ) : (
-                  <a
-                    href="#"
-                    className="card-link btn btn-outline-danger"
-                    onClick={() => setDeleteUser(true)}
-                    style={{ width: "100%" }}
-                  >
-                    Eliminar cuenta
-                  </a>
-                )}
-              </ul>
-              <div className="card-body text-center">
-                <a href="#" className="btn btn-success" onClick={handleSubmit}>
-                  Save
-                </a>
-              </div>
+        <div className="card text-bg-secondary mb-5 w-sm-50">
+          <div className="card-body text-center">
+            <h5 className="card-title fw-bold text-black">Cambia tus datos</h5>
+          </div>
+          <ul className="list-group list-group-flush">
+            <div className="d-flex flex-column align-items-center">
+              <input
+                className="list-group-item w-100"
+                value={fullName}
+                required
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Full Name"
+              />
+              <input
+                className="list-group-item w-100"
+                value={email}
+                required
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
             </div>
+            <div className="fotos_input mx-3 mb-2 mt-2">
+              <label for="formFile" className="form-label pb-2">
+                Subir foto de perfil
+              </label>
+              <input
+                className="form-control w-100"
+                id="formFile"
+                multiple
+                type="file"
+                onChange={actions.uploadImagesToStore}
+              />
+            </div>
+            {changePassword ? (
+              <div className="password-box">
+                <input
+                  className="list-group-item w-100"
+                  value={password}
+                  required
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Nueva Contraseña"
+                />
+                <input
+                  className="list-group-item w-50"
+                  value={confirmPassword}
+                  required
+                  type="password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirma tu Contraseña"
+                />
+              </div>
+            ) : (
+              <a
+                href="#"
+                className="card-link "
+                onClick={() => setChangePassword(true)}
+              >
+                ¿Cambiar Contraseña?
+              </a>
+            )}
+            {deleteUser ? (
+              <a
+                href="#"
+                className="card-link btn btn-outline-danger mt-1"
+                onClick={actions.deleteUser}
+              >
+                Sí, deseo eliminar mi cuenta
+              </a>
+            ) : (
+              <a
+                href="#"
+                className="card-link mt-1"
+                onClick={() => setDeleteUser(true)}
+              >
+                ¿Eliminar cuenta?
+              </a>
+            )}
+          </ul>
+          <div className="card-body text-center">
+            <a href="#" className="btn btn-info" onClick={handleSubmit}>
+              Save
+            </a>
           </div>
         </div>
       ) : (
@@ -123,6 +147,6 @@ export const Edit = () => {
           <h5>Unauthorized...</h5>
         </div>
       )}
-    </>
+    </div>
   );
 };

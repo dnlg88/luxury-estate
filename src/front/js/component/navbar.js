@@ -20,7 +20,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark mb-2">
+    <nav className="navbar navbar-dark bg-dark">
       <div className="container">
         <Link to="/" className="text-decoration-none">
           <span onClick={handleClick} className="mb-0">
@@ -32,20 +32,35 @@ export const Navbar = () => {
         {store.token ? (
           <div className="d-flex">
             <Link to={`/user/${userInfo.id}`}>
-              <img
-                src={process.env.DEFAULT_PROFILE_PIC}
-                className="img-fluid"
-                style={{
-                  height: "50px",
-                  top: "3rem",
-                  border: "solid 5px black",
-                  borderRadius: "50%",
-                }}
-              />
+              {userInfo.imagen_perfil ? (
+                <img
+                  src={JSON.parse(localStorage.getItem("pub_userpic_url"))}
+                  className="img-fluid"
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    top: "3rem",
+                    border: "solid 5px black",
+                    borderRadius: "50%",
+                  }}
+                />
+              ) : (
+                <img
+                  src={process.env.DEFAULT_PROFILE_PIC}
+                  className="img-fluid"
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    top: "3rem",
+                    border: "solid 5px black",
+                    borderRadius: "50%",
+                  }}
+                />
+              )}
             </Link>
             <ul className="dropdown ps-0">
               <a
-                className="nav-link dropdown-toggle text-decoration-none"
+                className="nav-link dropdown-toggle text-decoration-none text-white pt-3 ps-1"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"

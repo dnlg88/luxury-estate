@@ -28,7 +28,7 @@ export const Home = () => {
   return (
     <>
       <div
-        className="contenedor-foto container d-flex justify-content-center pb-4"
+        className="contenedor-foto container d-flex justify-content-center pb-4 mt-2"
         style={{ backgroundImage: `url(${casa})` }}
       >
         <div className="plantilla container rounded-3 bg-light mb-4">

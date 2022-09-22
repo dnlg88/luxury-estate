@@ -53,6 +53,11 @@ def get_messages():
     response = user_handler.get_messages(current_user_id)
     return jsonify(response), 200
 
+@api.route('/getuser/<int:id>', methods=['GET'])
+def get_user(id):
+    response = user_handler.get_user(id)
+    return jsonify(response), 200
+
 
 @api.route('/send-message', methods=['POST'])
 def send_message():
