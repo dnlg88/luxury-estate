@@ -73,6 +73,9 @@ class User_Handler:
         if len(request_body["password"].strip()) != 0 and user.password != request_body["password"]:
             user.password = request_body["password"]
             updated = True
+        if request_body["foto"]:
+            user.imagen_perfil = request_body["foto"]
+            updated = True
         if updated:
             db.session.commit()
             user_info = user.serialize()
@@ -87,3 +90,8 @@ class User_Handler:
         db.session.delete(user)
         db.session.commit()
         return "user deleted"
+    
+    def get_user(self, id):
+        user = User.query.filter_by(id = id).first()
+        user_info = user.serialize()
+        return user_info

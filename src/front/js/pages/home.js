@@ -36,10 +36,8 @@ export const Home = () => {
       style={{ background: "RGB(230,255,240)" }}
     >
       <div
-        className="contenedor-foto container d-flex justify-content-center pb-4"
-        style={{
-          backgroundImage: `url(${casa})`,
-        }}
+        className="contenedor-foto container d-flex justify-content-center pb-4 mt-2"
+        style={{ backgroundImage: `url(${casa})` }}
       >
         <div
           className="plantilla container rounded-3 mb-4 text-dark bg-light"

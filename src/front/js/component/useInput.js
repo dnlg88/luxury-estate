@@ -19,7 +19,6 @@ const useInput = (initialValue) => {
         localStorage.setItem("pub_longitude", results?.features[0].center[0]);
         localStorage.setItem("pub_latitude", results?.features[0].center[1]);
         localStorage.setItem("pub_direccion", value);
-        console.log(process.env.MAPBOX_TOKEN);
       } catch (error) {
         console.log("Error fetching data, ", error);
       }

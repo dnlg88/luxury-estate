@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: null,
       userInfo: {},
+      ownerInfo: {},
       messages: [],
       userProperties: [],
       userPropertiesImages: [],
@@ -243,6 +244,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ token: token });
         console.log("getting token from local storage");
       },
+      validateToken: async () => {
+        const opts = {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        };
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/getmessages",
+            opts
+          );
+          if (resp.status !== 200) {
+            throw new Error("Something went wrong");
+          }
+          const data = await resp.json();
+          if (data.msg == "Token has expired") {
+            getActions().logout();
+            return true;
+          } else {
+            return true;
+          }
+        } catch (e) {
+          console.log(`${e.name}: ${e.message}`);
+        }
+      },
       logout: () => {
         localStorage.removeItem("token");
         localStorage.removeItem("messages");
@@ -251,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ token: null });
         console.log("logging out");
       },
-      updateUser: async (full_name, email, password) => {
+      updateUser: async (full_name, email, password, fotoUrl) => {
         const opts = {
           method: "POST",
           headers: {
@@ -262,6 +289,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             full_name: full_name,
             email: email,
             password: password,
+            foto: fotoUrl,
           }),
         };
         try {
@@ -967,6 +995,38 @@ const getState = ({ getStore, getActions, setStore }) => {
       updateResponsePublicar: (dato) => {
         setStore({ response_publicar: dato });
       },
+      uploadProfilePicToCloudinary: async () => {
+        const store = getStore();
+        const config = {
+          cloudName: "dsobw5vfl",
+          resource_type: "image",
+          upload_preset: "userprofile",
+        };
+        const apiUrl = `https://api.cloudinary.com/v1_1/${config.cloudName}/${config.resource_type}/upload/`;
+        const formData = new FormData();
+        formData.append("file", store.selectedImages[0]);
+        formData.append("upload_preset", config.upload_preset);
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            body: formData,
+          });
+          if (response.status != 200) {
+            throw new Error("The fetch has failed");
+          }
+          const jsonResponse = await response.json();
+          setStore({
+            receivedUserUrl: jsonResponse.url,
+          });
+          localStorage.setItem(
+            "pub_userpic_url",
+            JSON.stringify(store.receivedUserUrl)
+          );
+          return true;
+        } catch (error) {
+          console.log("The fetch has failed: ", error);
+        }
+      },
 
       updatePublicarPremium: () => {
         const store = getStore();
@@ -1019,6 +1079,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         await getActions().switchOffCharging();
         await getActions().resetStoreVariables();
         await getActions().clearLocalStorageNoUser();
+      },
+
+      getPropertyOwner: async (id) => {
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/getuser/" + id
+          );
+          if (resp.status != 200) {
+            throw new Error("The fetch has failed");
+          }
+          const data = await resp.json();
+          console.log(data);
+          setStore({ ownerInfo: data });
+          localStorage.setItem("ownerInfo", JSON.stringify(data));
+        } catch (error) {
+          console.log("The fetch has failed: ", error);
+        }
       },
 
       // clearPubFromLocalStorage: () => {  DEPRECADO por clearLocalStorageNoUser

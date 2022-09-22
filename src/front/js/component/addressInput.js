@@ -9,11 +9,11 @@ export const AddressInput = () => {
   return (
     <>
       <input
+        placeholder="Escribe la dirección"
         className="form-control"
-        placeholder="<Escribe la dirección>"
         {...address}
-        isTyping={address.value !== ""}
       />
+
       {address.suggestions?.length > 0 && (
         <div className="suggestion-box">
           {address.suggestions.map((suggestion, index) => {
