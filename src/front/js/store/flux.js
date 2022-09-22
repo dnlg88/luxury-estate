@@ -204,6 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           localStorage.setItem("token", data.access_token);
           localStorage.setItem("user_info", JSON.stringify(data.user));
+          localStorage.setItem("pub_userpic_url", data.user.imagen_perfil);
           setStore({ token: data.access_token, userInfo: data.user });
           console.log(data.user);
           return true;
@@ -1018,10 +1019,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             receivedUserUrl: jsonResponse.url,
           });
-          localStorage.setItem(
-            "pub_userpic_url",
-            JSON.stringify(store.receivedUserUrl)
-          );
+          localStorage.setItem("pub_userpic_url", jsonResponse.url);
           return true;
         } catch (error) {
           console.log("The fetch has failed: ", error);

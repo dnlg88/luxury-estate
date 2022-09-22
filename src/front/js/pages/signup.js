@@ -31,8 +31,8 @@ export const Signup = (props) => {
   return (
     <div className="container text-center">
       <div className="row justify-content-center mt-5">
-        <div className="col-6 mt-5">
-          <div className="card" style={{ width: "18rem;" }}>
+        <div className="col-sm-8 col-lg-6 mt-5">
+          <div className="card w-100 text-bg-secondary">
             <div className="card-body">
               <h5 className="card-title">Signup</h5>
               <p className="card-text pt-2">
@@ -41,14 +41,14 @@ export const Signup = (props) => {
             </div>
             <ul className="list-group list-group-flush">
               <input
-                className="list-group-item"
+                className="list-group-item w-100"
                 value={fullName}
                 required
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Full Name"
               />
               <input
-                className="list-group-item"
+                className="list-group-item w-100"
                 value={email}
                 required
                 type="email"
@@ -58,14 +58,14 @@ export const Signup = (props) => {
             </ul>
             <ul className="list-group list-group-flush">
               <input
-                className="list-group-item"
+                className="list-group-item w-100"
                 value={username}
                 required
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
               />
               <input
-                className="list-group-item"
+                className="list-group-item w-100"
                 value={password}
                 required
                 type="password"
@@ -73,7 +73,7 @@ export const Signup = (props) => {
                 placeholder="Password"
               />
               <input
-                className="list-group-item"
+                className="list-group-item w-100"
                 value={confirmPassword}
                 required
                 type="password"
@@ -81,13 +81,13 @@ export const Signup = (props) => {
                 placeholder="Confirm Password"
               />
             </ul>
-            <div className="card-body">
-              <a href="#" className="btn btn-success" onClick={handleSubmit}>
+            <div className="card-body d-flex justify-content-around">
+              <a href="#" className="btn btn-primary" onClick={handleSubmit}>
                 Signup
               </a>
               <Link to={"/"}>
                 {" "}
-                <a href="#" className="btn btn-danger">
+                <a href="#" className="btn btn-info">
                   {" "}
                   Home{" "}
                 </a>{" "}
