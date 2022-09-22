@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import swal from "sweetalert";
 
 export const Login = (props) => {
   const { store, actions } = useContext(Context);
@@ -11,8 +12,13 @@ export const Login = (props) => {
 
   const handleSubmit = async () => {
     await actions.login(username, password);
-    const user = JSON.parse(localStorage.getItem("user_info"));
-    navigate(`/user/${user.id}`);
+    if (store.isLoggedIn) {
+      const user = JSON.parse(localStorage.getItem("user_info"));
+      navigate(`/user/${user.id}`);
+    } else {
+      swal("Contraseña y/o Usuario incorrecto");
+      setPassword("");
+    }
   };
   return (
     <>

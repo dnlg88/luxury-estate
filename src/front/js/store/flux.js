@@ -208,11 +208,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             "pub_userpic_url",
             JSON.stringify(data.user.imagen_perfil)
           );
-          setStore({ token: data.access_token, userInfo: data.user });
+          setStore({
+            isLoggedIn: true,
+            token: data.access_token,
+            userInfo: data.user,
+          });
           console.log(data.user);
           return true;
         } catch (error) {
-          console.log(error);
+          setStore({ isLoggedIn: false });
         }
       },
       signup: async (username, password, full_name, email) => {

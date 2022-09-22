@@ -21,7 +21,7 @@ class User_Handler:
     def login(self, request_body):
         query = User.query.filter_by(username = request_body['username'], password = request_body['password']).first()
         if not query:
-            raise APIException('Error: username not found', status_code= 400)
+            raise APIException('Error: wrong username or password', status_code= 403)
         user = query.serialize()
         access_token = create_access_token(identity=user['id'])
         response = {"access_token": access_token, "user":user}
