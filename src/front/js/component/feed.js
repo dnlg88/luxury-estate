@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/dashboard.css";
+import logonormal from "../../img/logonormal.png";
+import logopremium from "../../img/logopremium.png";
 
 export const Feed = () => {
   const { store, actions } = useContext(Context);
@@ -35,24 +37,20 @@ export const Feed = () => {
               {item.fotos.length == 0 ? (
                 <div
                   onClick={() => pasarAlSingle(index)}
-                  className="main-image col-md-5 p-2"
-                  style={{ background: "rgb(233,238,241)", height: "40vh" }}
+                  className="main-image col-md-5 p-2 d-flex align-items-center justify-content-center"
+                  style={{ background: "rgb(233,238,241)", height: "46vh" }}
                 >
-                  <h6 className="text-danger fw-bolder">
-                    {item.premium == true ? "Anuncio Premium" : ""}
-                  </h6>
                   <h3 className="text-center py-5">Aviso no tiene fotos</h3>
                 </div>
               ) : (
                 <div
                   onClick={() => pasarAlSingle(index)}
                   className="main-imagen col-md-5 p-2"
-                  style={{ backgroundImage: `url(${item.fotos[0]})` }}
-                >
-                  <h6 className="text-danger fw-bolder">
-                    {item.premium == true ? "Anuncio Premium" : ""}
-                  </h6>
-                </div>
+                  style={{
+                    backgroundImage: `url(${item.fotos[0]})`,
+                    height: "46vh",
+                  }}
+                ></div>
               )}
               <div className="col-md-7 p-3">
                 <div className="card-body p-0">
@@ -89,11 +87,22 @@ export const Feed = () => {
                       ""
                     )}
                   </div>
-                  <div className="pt-2">
-                    <p className="card-text">{`${item.descripcion.slice(
-                      0,
-                      50
-                    )}...`}</p>
+                  <div className="pt-2 d-flex">
+                    <div className="col-9">
+                      <p className="card-text">{`${item.descripcion.slice(
+                        0,
+                        50
+                      )}...`}</p>
+                    </div>
+                    <div
+                      className="col-3 cajita_logo"
+                      style={{
+                        backgroundImage:
+                          item.premium == false
+                            ? `url(${logonormal})`
+                            : `url(${logopremium})`,
+                      }}
+                    ></div>
                   </div>
                 </div>
               </div>

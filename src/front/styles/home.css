@@ -1,5 +1,11 @@
+.homepage-body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+}
 .contenedor-foto {
-  padding-top: 9%;
+  padding-top: 10vw;
   padding-bottom: 12%;
   width: auto;
   min-height: 650px;
@@ -19,6 +25,10 @@ body {
 .plantilla {
   height: fit-content;
   width: fit-content;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: top;
+  background-position-x: center;
 }
 .titulo {
   height: fit-content;
@@ -28,4 +38,10 @@ body {
 }
 .selector {
   height: fit-content;
+}
+.fondo_tarjetas {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: top;
+  background-position-x: center;
 }
