@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
+import logoizquierdo from "../../img/logoizquierdo.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -20,12 +21,17 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark mb-2">
+    <nav
+      className="navbar navegador"
+      style={{
+        background: "RGB(18,57,98)",
+      }}
+    >
       <div className="container">
         <Link to="/" className="text-decoration-none">
           <span onClick={handleClick} className="mb-0">
-            <span className="logo1 display-6 text-white ">LUXURY</span>{" "}
-            <span className="logo2 display-6 text-white ">ESTATE</span>
+            <span className="logo1 display-6 fw-bolder">LUXURY</span>{" "}
+            <span className="logo2 display-6 fw-bolder">ESTATE</span>
           </span>
         </Link>
 
