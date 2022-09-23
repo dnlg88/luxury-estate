@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import swal from "sweetalert";
 
 export const Login = (props) => {
   const { store, actions } = useContext(Context);
@@ -11,8 +12,13 @@ export const Login = (props) => {
 
   const handleSubmit = async () => {
     await actions.login(username, password);
-    const user = JSON.parse(localStorage.getItem("user_info"));
-    navigate(`/user/${user.id}`);
+    if (store.isLoggedIn) {
+      const user = JSON.parse(localStorage.getItem("user_info"));
+      navigate(`/user/${user.id}`);
+    } else {
+      swal("Contraseña y/o Usuario incorrecto");
+      setPassword("");
+    }
   };
   return (
     <>
@@ -21,10 +27,10 @@ export const Login = (props) => {
       ) : (
         <div className="container text-center">
           <div className="row justify-content-center mt-5">
-            <div className="col-6 my-5">
-              <div className="card text-bg-dark">
+            <div className="col-md-6 my-5 pb-5">
+              <div className="card text-bg-secondary mb-5 pb-5">
                 <div className="card-body">
-                  <h5 className="card-title text-white fw-bold pb-2 border-bottom">
+                  <h5 className="card-title text-black fw-bold pb-2 border-bottom">
                     Login
                   </h5>
                   <p className="card-text">Welcome back!</p>

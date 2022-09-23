@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
@@ -20,7 +20,9 @@ export const Navbar = () => {
   };
 
   return (
+
     <nav className="navbar" style={{ background: "RGB(18,57,98)" }}>
+
       <div className="container">
         <Link to="/" className="text-decoration-none">
           <span onClick={handleClick} className="mb-0">
@@ -78,12 +80,12 @@ export const Navbar = () => {
         ) : (
           <div className="ms-auto">
             <Link to="/login">
-              <a href="#" className="btn btn-success">
+              <a href="#" className="btn btn-primary">
                 Login
               </a>
             </Link>
             <Link to="/signup">
-              <a href="#" className="btn btn-outline-success">
+              <a href="#" className="btn btn-outline-primary">
                 Signup
               </a>
             </Link>
