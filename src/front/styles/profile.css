@@ -37,10 +37,10 @@ body {
 }
 
 .card-propiedad {
-  opacity: 0.9;
+  opacity: 0.75;
 }
 .card-mensaje {
-  opacity: 0.9;
+  opacity: 0.75;
 }
 .card-propiedad:hover {
   opacity: 1;

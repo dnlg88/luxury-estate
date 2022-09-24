@@ -41,6 +41,7 @@ export const Edit = () => {
         setPassword("");
       } else if (resp.message == "Updated user succesfully") {
         swal("Datos actualizados");
+        actions.clearSelectedImages();
         setChangePassword(false);
         setPassword("");
       }
