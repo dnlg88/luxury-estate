@@ -50,7 +50,7 @@ def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
 # generate sitemap with all your endpoints
-@app.route('/')
+@app.route('/site')
 def sitemap():
     if ENV == "development":
         return generate_sitemap(app)
