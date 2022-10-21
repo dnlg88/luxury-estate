@@ -34,19 +34,19 @@ export const Login = (props) => {
                 </div>
                 <div className="d-flex flex-column align-items-center">
                   <input
-                    className="w-75 my-2 border-0 py-2 rounded"
+                    className="w-75 my-2 border-0 py-2 rounded ps-3"
                     value={username}
                     required
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="&#20; Username"
+                    placeholder="Username"
                   />
                   <input
-                    className="w-75 my-2 border-0 py-2 rounded"
+                    className="w-75 my-2 border-0 py-2 rounded ps-3"
                     required
                     value={password}
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="&#20; Password"
+                    placeholder="Password"
                   />
                 </div>
                 <div className="card-body d-flex justify-content-around">
